@@ -8,19 +8,28 @@
 #
 
 library(shiny)
+library(datasets)
 
-# Define server logic required to draw a histogram
+data("airquality")
+attach(airquality)
+
 shinyServer(function(input, output) {
-   
-  output$distPlot <- renderPlot({
+    formulaString <- reactive({
+        paste("Temp ~ ", input$variable)
+    })
     
-    # generate bins based on input$bins from ui.R
-    x    <- faithful[, 2] 
-    bins <- seq(min(x), max(x), length.out = input$bins + 1)
+    fit <- reactive({
+        lm(as.formula(formulaString()), data = ToothGrowth)
+    })
     
-    # draw the histogram with the specified number of bins
-    hist(x, breaks = bins, col = 'darkgray', border = 'white')
+    output$summaryFit <- renderPrint({
+        summary(fit())
+    })
     
-  })
-  
+    output$Plot <- renderPlot({
+        with(airquality, {
+            plot(as.formula(formulaString()), main = formulaString())
+            abline(fit(), col = 4)
+        })
+    })
 })

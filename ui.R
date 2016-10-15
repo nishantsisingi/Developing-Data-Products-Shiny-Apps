@@ -8,26 +8,31 @@
 #
 
 library(shiny)
-
-# Define UI for application that draws a histogram
 shinyUI(fluidPage(
-  
-  # Application title
-  titlePanel("toothgrowth"),
-  
-  # Sidebar with a slider input for number of bins 
-  sidebarLayout(
-    sidebarPanel(
-       sliderInput("bins",
-                   "Number of bins:",
-                   min = 1,
-                   max = 50,
-                   value = 30)
-    ),
+    titlePanel("New York Air Quality Measurements"),
     
-    # Show a plot of the generated distribution
-    mainPanel(
-       plotOutput("distPlot")
+    sidebarLayout(
+    sidebarPanel(
+        
+        helpText("Choose Airquality Variable"),
+        
+        selectInput("variable", "",
+                    c("Ozone" = "Ozone",
+                      "Solar.R" = "Solar.R",
+                      "Wind" = "Wind",
+                      "Temp" = "Temp",
+                      "Month" = "Month",
+                      "Day" = "Day"))
+    ),
+        
+        mainPanel(
+            h3("The following exercise is carried out to observe the effect of various variables on 
+               Temperature in New York from May to September 1973."),
+            h2("Regression Plot"),
+            plotOutput("Plot"),
+            h2("Summary Statistics"),
+            verbatimTextOutput("summaryFit")
+        )
     )
-  )
 ))
+    
