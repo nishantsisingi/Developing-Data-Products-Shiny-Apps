@@ -9,29 +9,25 @@
 
 library(shiny)
 
-shinyUI(pageWithSidebar(
-    
-    # Application title
-    headerPanel("Old Faithful Geyser Data"),
-    
-    # Sidebar with a slider input for number of bins
+# Define UI for application that draws a histogram
+shinyUI(fluidPage(
+  
+  # Application title
+  titlePanel("toothgrowth"),
+  
+  # Sidebar with a slider input for number of bins 
+  sidebarLayout(
     sidebarPanel(
-        sliderInput("bins",
-                    "Number of bins: 
-                     Eruption time in mins",
-                    min = 1,
-                    max = 50,
-                    value = 30
-                    )
+       sliderInput("bins",
+                   "Number of bins:",
+                   min = 1,
+                   max = 50,
+                   value = 30)
     ),
     
     # Show a plot of the generated distribution
     mainPanel(
-        h3("Data Description"),
-        p("Waiting time between eruptions and the duration of the eruption for the 
-          Old Faithful geyser in Yellowstone National Park, Wyoming, USA."),
-        p("The project's objective is to plot a histogram using this dataset."),
-        p("Choose the number of bins for the first variable, eruptions - Eruption time in mins"),
-        plotOutput("distPlot")
+       plotOutput("distPlot")
     )
+  )
 ))
