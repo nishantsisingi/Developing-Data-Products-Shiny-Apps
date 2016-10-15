@@ -10,4 +10,5 @@ waiting - Waiting time to next eruption (in mins)
 
 For the sake of simplicity we would be using only the first variable "eruptions"
 
-The project's objective is to plot a histogram using this dataset by choosing the number of bins for the first variable, eruptions - Eruption time in mins
+The project's objective is to plot a histogram using this dataset by choosing the number of bins for the first variable, 
+"eruptions" - Eruption time in mins
