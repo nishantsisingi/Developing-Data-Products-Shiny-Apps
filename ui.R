@@ -1,11 +1,3 @@
-#
-# This is the user-interface definition of a Shiny web application. You can
-# run the application by clicking 'Run App' above.
-#
-# Find out more about building applications with Shiny here:
-# 
-#    http://shiny.rstudio.com/
-#
 
 library(shiny)
 shinyUI(fluidPage(
@@ -26,8 +18,9 @@ shinyUI(fluidPage(
     ),
         
         mainPanel(
-            h3("The following exercise is carried out to observe the effect of various variables on 
+            h4("The following exercise is carried out to observe the effect of various variables on 
                Temperature in New York from May to September 1973."),
+            h4("Choose a variable from the left box to see its effect on Temp"),
             h2("Regression Plot"),
             plotOutput("Plot"),
             h2("Summary Statistics"),
