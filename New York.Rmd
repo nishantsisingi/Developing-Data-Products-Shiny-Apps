@@ -1,0 +1,73 @@
+---
+title: "New York Air Quality Measurements"
+author: "Nishant Sisingi"
+date: "October 15, 2016"
+output: 
+  ioslides_presentation: 
+    smaller: yes
+    widescreen: true
+    incremental: true
+    
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+
+## Data Description
+<div class="green">
+>- Daily air quality measurements in New York, May to September 1973.  
+
+>- The data were obtained from the New York State Department of Conservation (ozone data) and the National Weather Service (meteorological data)
+
+```{r}
+library(tibble)
+data("airquality")
+attach(airquality)
+airquality <- as_tibble(airquality)
+airquality
+
+```
+</div>
+
+## App Objectives 
+<div class="green">
+>- Observe the effects of various variables, taken one at a time on Temperature  
+
+>- Display Regression plot and Summary Statistics
+</div>
+
+##  Reactive Server Code 
+
+
+<div class="green">
+    shinyServer(function(input, output) {
+    formulaString <- reactive({
+        paste("Temp ~ ", input$variable)
+    })
+    
+    fit <- reactive({
+        lm(as.formula(formulaString()), data = ToothGrowth)
+    })
+    
+    output$summaryFit <- renderPrint({
+        summary(fit())
+    })
+    
+    output$Plot <- renderPlot({
+        with(airquality, {
+            plot(as.formula(formulaString()), main = formulaString())
+            abline(fit(), col = 4)
+        })
+    })
+    })
+</div>
+
+## Shiny App and Source code
+<div class="green">
+>- The app can be accessed here:  https://nishantsisingi.shinyapps.io/New_York_AirQuality/  
+
+>- Github link for the source code : https://github.com/nishantsisingi/Developing-Data-Products-Shiny-Apps
+</div>
